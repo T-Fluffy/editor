@@ -1,8 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./presentation/pages/Home";
-import EditorPage from "./presentation/pages/EditorPage";
+// src/App.tsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './presentation/pages/Home';
+import EditorPage from './presentation/pages/EditorPage';
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -12,5 +13,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

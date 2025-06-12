@@ -26,3 +26,7 @@ export const createDocument = async (title: string): Promise<Document> => {
 export const updateDocument = async (doc: Document): Promise<void> => {
   await axios.put(`${API}/${doc.id}`, doc);
 };
+
+export const deleteDocument = async (id: string): Promise<void> => {
+  await axios.delete(`${API}/${id}`);
+};
