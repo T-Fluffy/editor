@@ -7,6 +7,7 @@ import AppLayout from '../layout/AppLayout';
 
 export default function EditorPage() {
   const { id } = useParams<{ id: string }>();
+  const title = `Document ${id}`; // Placeholder title, replace with actual logic if needed
   const [savedContent, setSavedContent] = useState<string>('');
 
   const editor = useEditor({
@@ -17,7 +18,18 @@ export default function EditorPage() {
 
   return (
     <AppLayout>
-      <h1 className="text-2xl font-bold mb-4 text-blue-900">Editing Document {id}</h1>
+      {/* Navigation bar with links to home and edit document */}
+      <nav className="mb-4" aria-label="breadcrumb" style={{ backgroundColor: '#f0f4ff', padding: '10px', borderRadius: '8px' }}>
+        <ul className="flex space-x-4">
+          <li>
+            <a href="/" className="text-blue-600 hover:underline">Home</a>
+          </li>
+          <li>
+            <a href={`/editor/${id}`} className="text-blue-600 hover:underline">Edit Document {id}</a>
+          </li>
+        </ul>
+      </nav>
+      <h1 className="text-2xl font-bold mb-4 text-blue-900">Editing Document {id} : {title}</h1>
       <div className="border rounded bg-blue-50 p-4 shadow flex flex-col">
         <div className="flex space-x-2 mb-3">
           <button
@@ -35,7 +47,7 @@ export default function EditorPage() {
             <FaItalic />
           </button>
         </div>
-        <div className="flex-1 overflow-auto min-h-[300px] max-h-[600px]">
+        <div className="flex-1 overflow-auto min-h-[300px] max-h-[600px] bg-white p-4 rounded shadow text-gray-800">
           {editor ? <EditorContent editor={editor} /> : <p>Loading editor…</p>}
         </div>
       </div>
