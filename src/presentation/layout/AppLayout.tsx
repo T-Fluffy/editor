@@ -17,33 +17,36 @@ export default function AppLayout({ children }: AppLayoutProps) {
       <div className="flex flex-col items-center bg-blue-900 text-white p-4 space-y-6 w-16 md:w-20 lg:w-24">
         <button
           className="p-2 hover:bg-blue-800 rounded-md"
+          aria-label="Documents List"
+          onClick={( e) => { e.preventDefault(); window.location.href = '/' }}
+        >
+          <DocumentTextIcon className="h-5 w-5"/>
+        </button>
+        <button
+          className="p-2 hover:bg-blue-800 rounded-md"
           aria-label="New Document"
           onClick={(e) => {
             e.preventDefault();
             window.location.href = '/editor/new';
           }}  
         >
-          <PencilSquareIcon className="h-3 w-3" />
-        </button>
-        <button
-          className="p-2 hover:bg-blue-800 rounded-md"
-          aria-label="Documents List"
-          onClick={( e) => { e.preventDefault(); window.location.href = '/' }}
-        >
-          <DocumentTextIcon className="h-3 w-3"/>
+          <PencilSquareIcon className="h-5 w-5" />
         </button>
         <button
           className="p-2 hover:bg-blue-800 rounded-md"
           aria-label="Settings"
         >
-          <Cog6ToothIcon className="h-3 w-3" />
+          <Cog6ToothIcon className="h-5 w-5" />
         </button>
         <div className="mt-auto">
           <button
             className="p-2 hover:bg-blue-800 rounded-md"
             aria-label="Logout"
+            onClick={(e) => { 
+             e.preventDefault();
+             window.location.href = '/login'; }}
           >
-            <ArrowRightOnRectangleIcon className="h-3 w-3" />
+            <ArrowRightOnRectangleIcon className="h-5 w-5" />
           </button>
         </div>
       </div>
