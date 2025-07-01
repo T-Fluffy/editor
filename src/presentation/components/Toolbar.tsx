@@ -2,7 +2,7 @@
 import React from 'react';
 import { FaBold, FaItalic, FaUnderline, FaStrikethrough, FaHeading, FaListOl, FaListUl, FaAlignLeft, FaAlignCenter, FaAlignRight } from 'react-icons/fa';
 import { Editor } from '@tiptap/react';
-import { Underline } from '@tiptap/extension-underline';
+
 
 interface Props { editor: Editor | null; }
 
