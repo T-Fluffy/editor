@@ -1,54 +1,29 @@
 import type { ReactNode } from 'react';
-import {
-  PencilSquareIcon,
-  DocumentTextIcon,
-  Cog6ToothIcon,
-  ArrowRightOnRectangleIcon,
-} from '@heroicons/react/24/outline';
 
-interface AppLayoutProps {
-  children: ReactNode;
-}
+interface Props { children: ReactNode; }
 
-export default function AppLayout({ children }: AppLayoutProps) {
+export default function AppLayout({ children }: Props) {
   return (
-    <div className="flex h-screen w-screen">
-      {/* Sidebar */}
-      <div className="flex flex-col items-center bg-blue-900 text-white p-4 space-y-6 w-16 md:w-20 lg:w-24">
-        <button
-          className="p-2 hover:bg-blue-800 rounded-md"
-          aria-label="New Document"
-          onClick={(e) => {
-            e.preventDefault();
-            window.location.href = '/editor/new';
-          }}  
-        >
-          <PencilSquareIcon className="h-3 w-3" />
-        </button>
-        <button
-          className="p-2 hover:bg-blue-800 rounded-md"
-          aria-label="Documents List"
-          onClick={( e) => { e.preventDefault(); window.location.href = '/' }}
-        >
-          <DocumentTextIcon className="h-3 w-3"/>
-        </button>
-        <button
-          className="p-2 hover:bg-blue-800 rounded-md"
-          aria-label="Settings"
-        >
-          <Cog6ToothIcon className="h-3 w-3" />
-        </button>
-        <div className="mt-auto">
-          <button
-            className="p-2 hover:bg-blue-800 rounded-md"
-            aria-label="Logout"
-          >
-            <ArrowRightOnRectangleIcon className="h-3 w-3" />
-          </button>
+    <div className="w-screen h-screen flex flex-col bg-gray-100">
+      <header className="flex items-center justify-between bg-white px-4 py-2 border-b">
+        <h2 className="text-xl font-semibold text-gray-800">My Document</h2>
+        <div className="flex space-x-2">
+          <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">Share</button>
+          <button className="px-3 py-1 text-sm bg-white border rounded hover:bg-gray-50">Save</button>
         </div>
+      </header>
+
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar slot */}
+        <aside className="hidden md:block w-64 bg-white border-r overflow-y-auto">
+          {/* Add sidebar content here if needed */}
+        </aside>
+
+        {/* Main content area expands */}
+        <main className="flex-1 overflow-auto p-4">
+          {children}
+        </main>
       </div>
-      {/* Main Content */}
-      <div className="flex-1 p-6 overflow-y-auto">{children}</div>
     </div>
   );
 }

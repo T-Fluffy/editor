@@ -13,8 +13,7 @@ interface Props {
 export default function DocumentListItem({ doc, onClick }: Props) {
   return (
     <div
-      className="flex justify-between items-center p-4 bg-blue-100 rounded-lg
-             shadow hover:bg-blue-200 cursor-pointer"
+      className="flex justify-between items-center p-4 bg-blue-100 rounded-lg shadow hover:bg-blue-200 cursor-pointer"
       onClick={() => onClick(doc.id)}
     >
       <div>
