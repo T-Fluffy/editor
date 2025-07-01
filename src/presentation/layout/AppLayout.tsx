@@ -4,12 +4,12 @@ interface Props { children: ReactNode; }
 
 export default function AppLayout({ children }: Props) {
   return (
-    <div className="w-screen h-screen flex flex-col bg-gray-100">
-      <header className="flex items-center justify-between bg-white px-4 py-2 border-b">
-        <h2 className="text-xl font-semibold text-gray-800">My Document</h2>
+    <div className="w-screen h-screen flex flex-col bg-sky-500/50">
+      <header className="flex items-center justify-between bg-black px-4 py-2 border-b">
+        <h2 className="text-xl font-semibold text-white">My Document</h2>
         <div className="flex space-x-2">
-          <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">Share</button>
-          <button className="px-3 py-1 text-sm bg-white border rounded hover:bg-gray-50">Save</button>
+          <button style={{ backgroundColor: 'pink' }} className="px-3 py-1 text-sm border rounded hover:bg-blue-600">Share</button>
+          <button style={{ backgroundColor: 'pink' }} className="px-3 py-1 text-sm border rounded hover:bg-gray-50">Save</button>
         </div>
       </header>
 
