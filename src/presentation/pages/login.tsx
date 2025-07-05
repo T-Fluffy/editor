@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 interface LoginFormInputs {
   email: string;
@@ -15,7 +14,7 @@ export default function Login() {
   };
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center bg-blue-50">
+    <div className="w-screen h-screen flex items-center justify-center bg-grey-500">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg mx-4">
         <h2 className="text-3xl font-bold text-center text-blue-900 mb-6">Login</h2>
 
@@ -44,7 +43,7 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-blue-500 font-semibold py-2 px-4 rounded-md"
             onClick={(e) => {
                 e.preventDefault();
                 window.location.href = '/';}}
