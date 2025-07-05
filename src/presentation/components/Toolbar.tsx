@@ -1,6 +1,5 @@
-// src/components/Toolbar.tsx
 import React from 'react';
-import { FaBold, FaItalic, FaUnderline, FaStrikethrough, FaHeading, FaListOl, FaListUl, FaAlignLeft, FaAlignCenter, FaAlignRight } from 'react-icons/fa';
+import { FaBold, FaItalic, FaUnderline, FaStrikethrough, FaListOl, FaListUl, FaAlignLeft, FaAlignCenter, FaAlignRight } from 'react-icons/fa';
 import { Editor } from '@tiptap/react';
 
 
@@ -28,16 +27,32 @@ export function Toolbar({ editor }: Props) {
     <div className="flex flex-wrap items-center gap-1 sm:gap-2 p-2 bg-gray-50 border-b sticky top-0 z-10">
       {btn(() => editor.chain().focus().toggleBold(), 'bold', <FaBold />)}
       {btn(() => editor.chain().focus().toggleItalic(), 'italic', <FaItalic />)}
-      {btn(() => editor.chain().focus().toggleUnderline(), 'underline', <FaUnderline />)}
+      {/* Make sure the Underline extension is added to your Editor setup for this to work */}
+      {btn(
+        () => editor.chain().focus()['toggleUnderline']?.(),
+        'underline',
+        <FaUnderline />
+      )}
       {btn(() => editor.chain().focus().toggleStrike(), 'strike', <FaStrikethrough />)}
       <div className="hidden sm:block border-l h-6 mx-2" />
       {btn(() => editor.chain().focus().toggleBulletList(), 'bulletList', <FaListUl />)}
       {btn(() => editor.chain().focus().toggleOrderedList(), 'orderedList', <FaListOl />)}
       <div className="hidden sm:block border-l h-6 mx-2" />
-      {btn(() => editor.chain().focus().setTextAlign('left'), 'textAlign', <FaAlignLeft />)}
-      {btn(() => editor.chain().focus().setTextAlign('center'), 'textAlign', <FaAlignCenter />)}
-      {btn(() => editor.chain().focus().setTextAlign('right'), 'textAlign', <FaAlignRight />)}
+      {btn(
+      () =>editor.chain().focus().setTextAlign('left'),
+      'textAlignLeft',
+      <FaAlignLeft />
+      )}
+      {btn(
+      () => editor.chain().focus().setTextAlign('center'),
+      'textAlignCenter',
+      <FaAlignCenter />
+      )}
+      {btn(
+      () => editor.chain().focus().setTextAlign('right'),
+      'textAlignRight',
+      <FaAlignRight />
+      )}
     </div>
   );
 }
-

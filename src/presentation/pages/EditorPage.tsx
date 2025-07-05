@@ -2,9 +2,18 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { Toolbar } from '../components/Toolbar';
 import AppLayout from '../layout/AppLayout';
+import Underline from '@tiptap/extension-underline';
+import TextAlign from '@tiptap/extension-text-align';
 
 export default function EditorPage() {
-  const editor = useEditor({ extensions: [StarterKit], content: '<p>Start writing…</p>' });
+  const editor = useEditor({ 
+    extensions: [
+      StarterKit,
+      Underline,
+       TextAlign.configure({
+      types: ['heading', 'paragraph'], // ou selon tes besoins
+    }),
+    ], content: '<p>Start writing…</p>' });
 
   return (
     <AppLayout>

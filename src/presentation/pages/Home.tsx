@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <AppLayout>
       <h1 className="text-2xl font-bold mb-4">Your Documents</h1>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 text-gray-800">
         {mockDocs.map(doc => (
           <DocumentListItem
             key={doc.id}
