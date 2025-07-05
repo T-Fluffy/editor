@@ -2,6 +2,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './presentation/pages/Home';
 import EditorPage from './presentation/pages/EditorPage';
+import Login from './presentation/pages/login';
+
 
 export default function App() {
   return (
@@ -9,6 +11,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/editor/:id" element={<EditorPage />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
