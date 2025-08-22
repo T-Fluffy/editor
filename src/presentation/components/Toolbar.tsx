@@ -8,14 +8,14 @@ interface Props { editor: Editor | null; }
 export function Toolbar({ editor }: Props) {
   if (!editor) return null;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const btn = (action: () => any, format: string, icon: React.ReactNode) => {
     const isActive = editor.isActive(format);
     return (
       <button
         onClick={() => action().run()}
-        className={`p-2 mx-1 rounded transition-colors ${
-          isActive ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-200'
-        }`}
+        className={`p-2 mx-1 rounded transition-colors ${isActive ? 'bg-blue-100 text-blue-600' : 'text-gray-700 hover:bg-gray-200'
+          }`}
         title={format}
       >
         {icon}
@@ -39,19 +39,19 @@ export function Toolbar({ editor }: Props) {
       {btn(() => editor.chain().focus().toggleOrderedList(), 'orderedList', <FaListOl />)}
       <div className="hidden sm:block border-l h-6 mx-2" />
       {btn(
-      () =>editor.chain().focus().setTextAlign('left'),
-      'textAlignLeft',
-      <FaAlignLeft />
+        () => editor.chain().focus().setTextAlign('left'),
+        'textAlignLeft',
+        <FaAlignLeft />
       )}
       {btn(
-      () => editor.chain().focus().setTextAlign('center'),
-      'textAlignCenter',
-      <FaAlignCenter />
+        () => editor.chain().focus().setTextAlign('center'),
+        'textAlignCenter',
+        <FaAlignCenter />
       )}
       {btn(
-      () => editor.chain().focus().setTextAlign('right'),
-      'textAlignRight',
-      <FaAlignRight />
+        () => editor.chain().focus().setTextAlign('right'),
+        'textAlignRight',
+        <FaAlignRight />
       )}
     </div>
   );

@@ -4,16 +4,18 @@ import { Toolbar } from '../components/Toolbar';
 import AppLayout from '../layout/AppLayout';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
+import MediaButtons from '../components/MediaButtons';
 
 export default function EditorPage() {
-  const editor = useEditor({ 
+  const editor = useEditor({
     extensions: [
       StarterKit,
       Underline,
-       TextAlign.configure({
-      types: ['heading', 'paragraph'], // ou selon tes besoins
-    }),
-    ], content: '<p>Start writing…</p>' });
+      TextAlign.configure({
+        types: ['heading', 'paragraph'], // ou selon tes besoins
+      }),
+    ], content: '<p>Start writing…</p>'
+  });
 
   return (
     <AppLayout>
@@ -23,6 +25,7 @@ export default function EditorPage() {
           {editor ? <EditorContent editor={editor} /> : <p>Loading editor…</p>}
         </div>
       </div>
+      <MediaButtons />
     </AppLayout>
   );
 }
