@@ -3,11 +3,7 @@ import { useState } from 'react';
 import AppLayout from '../layout/AppLayout';
 import DocumentListItem, { type DocumentSummary } from '../components/DocumentListItem';
 import Login from '../components/login';
-
-interface HomeProps {
-  isLogged: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { HomeProps } from '../interfaces/auth.ui';
 
 export default function Home({ isLogged, setIsLoggedIn }: HomeProps) {
   const navigate = useNavigate();
@@ -91,18 +87,20 @@ export default function Home({ isLogged, setIsLoggedIn }: HomeProps) {
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-2xl font-bold text-gray-800">Your Documents</h1>
-            
-            {/* Upload Button */}
-            <label className="bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 transition-colors">
-              <input
-                type="file"
-                multiple
-                accept=".pdf,.doc,.docx,.txt,image/*"
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-              📁 Upload Files
-            </label>
+          </div>
+
+          <div className="mt-6 flex justify-center mb-6 space-x-4">
+              {/* Upload Button */}
+              <label className="bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-blue-700 transition-colors">
+                <input
+                  type="file"
+                  multiple
+                  accept=".pdf,.doc,.docx,.txt,image/*"
+                  onChange={handleFileUpload}
+                  className="hidden"
+                />
+                📁 Upload Files
+              </label>
           </div>
 
           <div className="grid gap-4 grid-cols-1">
@@ -120,6 +118,7 @@ export default function Home({ isLogged, setIsLoggedIn }: HomeProps) {
                 <p className="text-sm">Upload your first file to get started</p>
               </div>
             )}
+
           </div>
         </div>
       ) : (

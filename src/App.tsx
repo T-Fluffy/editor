@@ -1,5 +1,4 @@
-// src/App.tsx
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import Home from './presentation/pages/Home';
 import EditorPage from './presentation/pages/EditorPage';
@@ -13,9 +12,20 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login isLogged={isLogged} setIsLoggedIn={setIsLogged} />} />
-        <Route path="/" element={<Home isLogged={isLogged} setIsLoggedIn={setIsLogged} />} />
-        <Route path="/editor/:id" element={<EditorPage />} />
-        <Route path="/viewer/:id" element={<DocumentViewer />} />
+        
+        {/* Protected Routes */}
+        <Route 
+          path="/" 
+          element={isLogged ? <Home isLogged={isLogged} setIsLoggedIn={setIsLogged} /> : <Navigate to="/login" />} 
+        />
+        <Route 
+          path="/editor/:id" 
+          element={isLogged ? <EditorPage /> : <Navigate to="/login" />} 
+        />
+        <Route 
+          path="/viewer/:id" 
+          element={isLogged ? <DocumentViewer /> : <Navigate to="/login" />} 
+        />
       </Routes>
     </BrowserRouter>
   );

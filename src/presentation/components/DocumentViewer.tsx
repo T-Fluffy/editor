@@ -1,9 +1,8 @@
-// src/presentation/pages/DocumentViewer.tsx
 import { useLocation, useParams } from 'react-router-dom';
 import AppLayout from '../layout/AppLayout';
 
 export default function DocumentViewer() {
-  const { id } = useParams();
+  useParams();
   const location = useLocation();
   const document = location.state?.document;
 
