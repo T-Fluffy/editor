@@ -13,8 +13,8 @@
 
 
 - ⚛️ **React** + **TypeScript** + **Vite** + **Tailwind CSS** (Frontend)
-- 🧱 **ASP.NET Core 8** + **PostgreSQL** + **SignalR** (Backend)
-- 🐳 **Docker / Podman** for containerization
+- 🧱 **ASP.NET Core 8** + **PostgreSQL** + **SignalR** (Backend) [This part is still in early development phase]
+- 🐳 **Docker** for containerization
 
 ---
 
