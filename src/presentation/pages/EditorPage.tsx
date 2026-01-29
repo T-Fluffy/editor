@@ -30,42 +30,81 @@ export default function EditorPage() {
         types: ['heading', 'paragraph'],
       }),
     ],
-    content: `<h1>Welcome to Micro-Doc</h1><p>Start typing...</p>`,
-    editable: true,
-    autofocus: true,
-    
+    content: `<p>Start typing your document...</p>`,
+    editorProps: {
+      attributes: {
+        class: 'prose prose-slate max-w-none focus:outline-none',
+      },
+    },
   });
 
   return (
     <AppLayout editor={editor}>
-      <div className="relative min-h-screen flex flex-col items-center">
+      {/* 1. Main Background (Dark Grey like Word/Docs workspace) */}
+      <div className="relative min-h-screen flex flex-col items-center bg-[#e2e8f0] overflow-y-auto pb-20">
         
-        {/* Toolbar is now permanently visible and stable */}
-        <div className="fixed top-20 z-50">
+        {/* Toolbar (Fixed at top) */}
+        <div className="sticky top-0 z-50 mt-4 mb-8">
           <Toolbar 
             editor={editor} 
-            className="rounded-2xl bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 shadow-2xl px-6 py-2"
+            className="rounded-xl bg-white/90 backdrop-blur-xl border border-gray-200 shadow-xl px-4 py-2"
           />
         </div>
 
-        {/* Removed the 'mt-32' bounce and 'scale' transforms */}
-        <div className="relative mt-40 mb-20">
-          <div className="bg-white rounded-sm overflow-hidden border border-white/5 shadow-2xl">
-            <EditorContent
-              editor={editor}
-              className="prose prose-slate max-w-none focus:outline-none"
-              style={{ width: '210mm', minHeight: '297mm', padding: '30mm' }}
-            />
-          </div>
+        {/* 2. The Editor Container (Visual Pages) */}
+        <div className="editor-container shadow-2xl">
+          <EditorContent editor={editor} />
         </div>
       </div>
 
+      {/* 3. CSS Logic for Pages & Black Text */}
       <style dangerouslySetInnerHTML={{ __html: `
-        .ProseMirror { outline: none !important; }
-        .ProseMirror table { border-collapse: collapse; table-layout: fixed; width: 100%; margin: 0; overflow: hidden; }
-        .ProseMirror td, .ProseMirror th { border: 2px solid #ced4da; box-sizing: border-box; min-width: 1em; padding: 3px 5px; position: relative; vertical-align: top; }
-        .ProseMirror th { background-color: #f1f3f5; font-weight: bold; text-align: left; }
-        .ProseMirror img { max-width: 100%; height: auto; border-radius: 8px; }
+        /* --- PAGE SIMULATION --- */
+        .editor-container {
+          width: 210mm; /* Exact A4 Width */
+        }
+        
+        /* This is the magic part: Visual Page Breaks */
+        .ProseMirror {
+          min-height: 297mm; /* Start with 1 page height */
+          
+          /* Create the illusion of pages using a gradient:
+             0mm -> 297mm : White (The Page)
+             297mm -> 307mm : Grey (The Gap between pages)
+             Repeats automatically */
+          background-image: linear-gradient(to bottom, white 0mm, white 297mm, #e2e8f0 297mm, #e2e8f0 307mm);
+          background-size: 100% 307mm; /* The height of 1 page + 1 gap */
+          background-repeat: repeat-y;
+          
+          padding: 25mm; /* Margins */
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* --- TEXT COLOR (Strict Black) --- */
+        .ProseMirror p, 
+        .ProseMirror h1, 
+        .ProseMirror h2, 
+        .ProseMirror h3, 
+        .ProseMirror ul, 
+        .ProseMirror ol,
+        .ProseMirror li,
+        .ProseMirror span {
+          color: #000000 !important; /* Forces strict black ink */
+        }
+
+        /* --- CLEAN UP UI --- */
+        .ProseMirror:focus { outline: none; }
+        
+        /* Table Styles */
+        .ProseMirror table { border-collapse: collapse; margin: 0; overflow: hidden; }
+        .ProseMirror td, .ProseMirror th { border: 1px solid black; padding: 3px 5px; vertical-align: top; }
+        
+        /* Print Fixes (Hides the grey gaps when printing) */
+        @media print {
+          body { background: white; }
+          .ProseMirror { background: white; margin: 0; box-shadow: none; }
+          .sticky { display: none; } /* Hide toolbar in print */
+        }
       `}} />
     </AppLayout>
   );

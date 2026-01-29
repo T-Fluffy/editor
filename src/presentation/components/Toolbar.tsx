@@ -1,9 +1,10 @@
+// src/presentation/components/Toolbar.tsx
 import React from 'react';
 import {
   FaBold, FaItalic, FaUnderline, 
   FaListOl, FaListUl, FaAlignLeft, FaAlignCenter, 
   FaAlignRight, FaUndo, FaRedo, FaCode, 
-  FaQuoteRight, FaHeading, FaHighlighter, FaPalette
+  FaQuoteRight, FaHighlighter, FaPalette
 } from 'react-icons/fa';
 import { Editor } from '@tiptap/react';
 
@@ -22,8 +23,10 @@ interface ToolbarButtonProps {
 export function Toolbar({ editor, className }: Props) {
   if (!editor) return null;
 
+  // Optimized button to prevent focus loss
   const ToolbarButton = ({ action, icon, title, isActive = false }: ToolbarButtonProps) => (
     <button
+      onMouseDown={(e) => e.preventDefault()} // Prevents the button from taking focus away from the editor
       onClick={action}
       className={`p-2 rounded-xl transition-all duration-300 flex items-center justify-center min-w-[36px] h-[36px] ${
         isActive 
@@ -42,7 +45,7 @@ export function Toolbar({ editor, className }: Props) {
   return (
     <div className={`flex flex-wrap items-center gap-1.5 p-2 backdrop-blur-xl border border-white/10 shadow-2xl transition-all ${className}`}>
       
-      {/* 1. History (Undo/Redo) - Moved to start for better UX */}
+      {/* 1. History */}
       <div className="flex items-center space-x-1">
         <ToolbarButton 
           action={() => editor.chain().focus().undo().run()} 
@@ -58,25 +61,25 @@ export function Toolbar({ editor, className }: Props) {
 
       <Separator />
 
-      {/* 2. Structure (Headings) */}
+      {/* 2. Headings */}
       <div className="flex items-center space-x-1">
         <ToolbarButton 
           action={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} 
-          icon={<div className="font-bold text-[10px]">H1</div>} 
-          title="Heading 1" 
+          icon={<span className="font-bold text-[10px]">H1</span>} 
+          title="H1" 
           isActive={editor.isActive('heading', { level: 1 })} 
         />
         <ToolbarButton 
           action={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} 
-          icon={<div className="font-bold text-[10px]">H2</div>} 
-          title="Heading 2" 
+          icon={<span className="font-bold text-[10px]">H2</span>} 
+          title="H2" 
           isActive={editor.isActive('heading', { level: 2 })} 
         />
       </div>
 
       <Separator />
 
-      {/* 3. Basic Styles */}
+      {/* 3. Inline Styling (The "Stackable" styles) */}
       <div className="flex items-center space-x-1">
         <ToolbarButton 
           action={() => editor.chain().focus().toggleBold().run()} 
@@ -106,30 +109,26 @@ export function Toolbar({ editor, className }: Props) {
 
       <Separator />
 
-      {/* 4. Color Picker (Hidden Input Trick) */}
-      <div className="relative flex items-center justify-center">
+      {/* 4. Color Selection */}
+      <div className="relative flex items-center justify-center group">
         <input
           type="color"
-          onInput={(event: any) => editor.chain().focus().setColor(event.target.value).run()}
-          value={editor.getAttributes('textStyle').color || '#ffffff'}
-          className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
-          title="Text Color"
+          onInput={(e: any) => editor.chain().focus().setColor(e.target.value).run()}
+          value={editor.getAttributes('textStyle').color || '#000000'}
+          className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
         />
-        <div 
-            className={`p-2 rounded-xl flex items-center justify-center min-w-[36px] h-[36px] text-gray-400 hover:bg-white/10 hover:text-white transition-all`}
-        >
-            <FaPalette size={12} />
-            {/* Show current color dot */}
-            <div 
-                className="w-2 h-2 rounded-full ml-1 border border-white/20" 
-                style={{ backgroundColor: editor.getAttributes('textStyle').color || '#fff' }} 
-            />
+        <div className="p-2 rounded-xl flex items-center justify-center min-w-[36px] h-[36px] text-gray-400 group-hover:text-white transition-all">
+          <FaPalette size={12} />
+          <div 
+            className="w-2 h-2 rounded-full ml-1 border border-white/20" 
+            style={{ backgroundColor: editor.getAttributes('textStyle').color || '#000000' }} 
+          />
         </div>
       </div>
 
       <Separator />
 
-      {/* 5. Lists & Quotes */}
+      {/* 5. Lists & Blocks */}
       <div className="flex items-center space-x-1">
         <ToolbarButton 
           action={() => editor.chain().focus().toggleBulletList().run()} 
@@ -153,7 +152,7 @@ export function Toolbar({ editor, className }: Props) {
 
       <Separator />
 
-      {/* 6. Alignment & Code */}
+      {/* 6. Alignment */}
       <div className="flex items-center space-x-1">
         <ToolbarButton 
           action={() => editor.chain().focus().setTextAlign('left').run()} 
@@ -168,13 +167,12 @@ export function Toolbar({ editor, className }: Props) {
           isActive={editor.isActive({ textAlign: 'center' })} 
         />
         <ToolbarButton 
-          action={() => editor.chain().focus().toggleCode().run()} 
-          icon={<FaCode size={12} />} 
-          title="Code" 
-          isActive={editor.isActive('code')} 
+          action={() => editor.chain().focus().setTextAlign('right').run()} 
+          icon={<FaAlignRight size={12} />} 
+          title="Align Right" 
+          isActive={editor.isActive({ textAlign: 'right' })} 
         />
       </div>
-
     </div>
   );
 }
