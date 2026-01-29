@@ -19,14 +19,6 @@
 - **React Query** for efficient data fetching and caching
 - **Zod / Yup (Planned)** for schema validation
 
-### Backend (🧠 `EditorServer`)
-- **ASP.NET Core 8 Web API**
-- **Entity Framework Core** with **PostgreSQL**
-- **SignalR** for real-time collaboration
-- **Clean Architecture**: Domain, Application, Infrastructure, WebApi layers
-- **JWT Auth (Planned)** for secure login/session management
-- **Podman** for containerized deployment
-
 ---
 
 ## ✨ Planned Features
