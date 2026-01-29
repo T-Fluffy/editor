@@ -1,6 +1,16 @@
 # 📝 Editor — Collaborative Online Document Editor
 
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TipTap](https://img.shields.io/badge/TipTap-%23000000.svg?style=for-the-badge&logo=tiptap&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![.Net](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
 **Editor** is a modern, real-time collaborative document editing platform inspired by tools like Google Docs and Notion — designed to demonstrate clean software architecture and full-stack proficiency using:
+
 
 - ⚛️ **React** + **TypeScript** + **Vite** + **Tailwind CSS** (Frontend)
 - 🧱 **ASP.NET Core 8** + **PostgreSQL** + **SignalR** (Backend)
