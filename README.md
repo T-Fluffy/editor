@@ -19,6 +19,10 @@
   - Prosemirror under the hood
 - **React Icons** for the UI interface
 - **Docker Compose** for consistent dev environments
+- **React Router** for navigation
+- **TipTap (Planned)** for rich-text editing
+- **React Query** for efficient data fetching and caching
+- **Zod / Yup (Planned)** for schema validation
 
 ---
 
